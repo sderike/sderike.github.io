@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>搜同网站-同人作品与同好社区内容导航指南</title>
+<meta name="description" content="搜同网站是一个面向同人爱好者的内容导航与社区指南页面，帮助你了解同人作品、同好交流、内容分类、检索方法与安全浏览注意事项。">
+<meta name="keywords" content="搜同网站,同人网站,同人作品,同好社区,同人导航,同人分类">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+    :root{
+        --bg:#f6f4fb;
+        --surface:#ffffff;
+        --ink:#221d33;
+        --ink-soft:#5c5470;
+        --line:#e5dff2;
+        --brand:#6b4bd6;
+        --brand-dark:#4a2fa8;
+        --brand-soft:#efe9ff;
+        --accent:#ff7a59;
+        --accent-soft:#fff0eb;
+        --radius:16px;
+        --shadow:0 10px 30px rgba(74,47,168,.08);
+    }
+    *{box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+        margin:0;
+        background:var(--bg);
+        color:var(--ink);
+        font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+        line-height:1.75;
+        font-size:16px;
+    }
+    a{color:inherit;text-decoration:none;}
+    img{max-width:100%;}
+    h1,h2,h3{line-height:1.35;margin:0;}
+    p{margin:0 0 1em;}
+    ul{margin:0;padding:0;list-style:none;}
+
+    .wrap{
+        width:100%;
+        max-width:1180px;
+        margin:0 auto;
+        padding:0 20px;
+    }
+
+    /* ===== 顶部 ===== */
+    .site-header{
+        background:linear-gradient(135deg,#4a2fa8 0%,#6b4bd6 55%,#8a6bf0 100%);
+        color:#fff;
+        position:relative;
+        overflow:hidden;
+    }
+    .site-header::after{
+        content:"";
+        position:absolute;
+        right:-120px;
+        top:-120px;
+        width:360px;
+        height:360px;
+        border-radius:50%;
+        background:rgba(255,255,255,.08);
+    }
+    .header-bar{
+        display:flex;
+        align-items:center;
+        justify-content:space-between;
+        gap:16px;
+        padding:18px 0;
+        position:relative;
+        z-index:2;
+        flex-wrap:wrap;
+    }
+    .logo{
+        display:flex;
+        align-items:center;
+        gap:10px;
+        font-size:20px;
+        font-weight:700;
+        letter-spacing:.5px;
+    }
+    .logo-mark{
+        width:38px;
+        height:38px;
+        border-radius:11px;
+        background:rgba(255,255,255,.18);
+        border:1px solid rgba(255,255,255,.35);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:18px;
+    }
+    .logo small{
+        display:block;
+        font-size:11px;
+        font-weight:400;
+        opacity:.75;
+        letter-spacing:1px;
+    }
+    .main-nav{
+        display:flex;
+        flex-wrap:wrap;
+        gap:6px;
+    }
+    .main-nav a{
+        padding:7px 14px;
+        border-radius:999px;
+        font-size:14px;
+        color:rgba(255,255,255,.88);
+        transition:.2s;
+    }
+    .main-nav a:hover,
+    .main-nav a.active{
+        background:rgba(255,255,255,.18);
+        color:#fff;
+    }
+
+    .hero{
+        position:relative;
+        z-index:2;
+        padding:34px 0 56px;
+        display:grid;
+        grid-template-columns:1.35fr .95fr;
+        gap:40px;
+        align-items:center;
+    }
+    .hero h1{
+        font-size:38px;
+        font-weight:800;
+        letter-spacing:.5px;
+        margin-bottom:16px;
+    }
+    .hero h1 em{
+        font-style:normal;
+        background:linear-gradient(90deg,#ffd9a0,#ffb37a);
+        -webkit-background-clip:text;
+        background-clip:text;
+        color:transparent;
+    }
+    .hero-lead{
+        font-size:16px;
+        color:rgba(255,255,255,.9);
+        max-width:620px;
+        margin-bottom:22px;
+    }
+    .hero-actions{
+        display:flex;
+        flex-wrap:wrap;
+        gap:12px;
+    }
+    .btn{
+        display:inline-block;
+        padding:11px 24px;
+        border-radius:999px;
+        font-size:15px;
+        font-weight:600;
+        transition:.2s;
+        border:1px solid transparent;
+    }
+    .btn-primary{
+        background:#fff;
+        color:var(--brand-dark);
+    }
+    .btn-primary:hover{
+        background:#f1ecff;
+        transform:translateY(-2px);
+    }
+    .btn-ghost{
+        border-color:rgba(255,255,255,.5);
+        color:#fff;
+    }
+    .btn-ghost:hover{
+        background:rgba(255,255,255,.14);
+    }
+    .hero-panel{
+        background:rgba(255,255,255,.12);
+        border:1px solid rgba(255,255,255,.25);
+        border-radius:var(--radius);
+        padding:22px;
+        backdrop-filter:blur(4px);
+    }
+    .hero-panel h3{
+        font-size:15px;
+        margin-bottom:14px;
+        color:#fff;
+    }
+    .hero-list li{
+        display:flex;
+        align-items:flex-start;
+        gap:10px;
+        font-size:14px;
+        color:rgba(255,255,255,.9);
+        padding:7px 0;
+        border-bottom:1px dashed rgba(255,255,255,.18);
+    }
+    .hero-list li:last-child{border-bottom:none;}
+    .hero-list .dot{
+        flex:0 0 auto;
+        width:7px;
+        height:7px;
+        border-radius:50%;
+        background:#ffd9a0;
+        margin-top:9px;
+    }
+
+    /* ===== 通用区块 ===== */
+    .section{
+        padding:56px 0;
+    }
+    .section-alt{
+        background:var(--surface);
+    }
+    .section-head{
+        margin-bottom:30px;
+    }
+    .section-head h2{
+        font-size:26px;
+        font-weight:800;
+        margin-bottom:10px;
+    }
+    .section-head h2 span{
+        color:var(--brand);
+    }
+    .section-head p{
+        color:var(--ink-soft);
+        font-size:15px;
+        max-width:760px;
+        margin:0;
+    }
+
+    .grid{
+        display:grid;
+        gap:20px;
+    }
+    .grid-3{grid-template-columns:repeat(3,1fr);}
+    .grid-2{grid-template-columns:repeat(2,1fr);}
+    .grid-4{grid-template-columns:repeat(4,1fr);}
+
+    .card{
+        background:var(--surface);
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        padding:24px;
+        box-shadow:var(--shadow);
+        transition:.25s;
+    }
+    .card:hover{
+        transform:translateY(-4px);
+        border-color:#d6cbf5;
+    }
+    .card .tag{
+        display:inline-block;
+        font-size:12px;
+        font-weight:600;
+        color:var(--brand-dark);
+        background:var(--brand-soft);
+        padding:3px 10px;
+        border-radius:999px;
+        margin-bottom:12px;
+    }
+    .card h3{
+        font-size:18px;
+        margin-bottom:10px;
+    }
+    .card p{
+        font-size:14.5px;
+        color:var(--ink-soft);
+        margin:0;
+    }
+
+    /* 分类导航 */
+    .cat-item{
+        display:flex;
+        gap:14px;
+        align-items:flex-start;
+        background:var(--surface);
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        padding:20px;
+        transition:.25s;
+    }
+    .cat-item:hover{
+        border-color:#cdbdf5;
+        background:#fbf9ff;
+    }
+    .cat-icon{
+        flex:0 0 auto;
+        width:46px;
+        height:46px;
+        border-radius:13px;
+        background:var(--brand-soft);
+        color:var(--brand-dark);
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:20px;
+        font-weight:700;
+    }
+    .cat-item h3{
+        font-size:16.5px;
+        margin-bottom:6px;
+    }
+    .cat-item p{
+        font-size:14px;
+        color:var(--ink-soft);
+        margin:0;
+    }
+
+    /* 步骤 */
+    .steps{
+        counter-reset:step;
+        display:grid;
+        gap:18px;
+        grid-template-columns:repeat(4,1fr);
+    }
+    .step{
+        background:var(--surface);
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        padding:24px 20px;
+        position:relative;
+    }
+    .step::before{
+        counter-increment:step;
+        content:counter(step,decimal-leading-zero);
+        display:block;
+        font-size:26px;
+        font-weight:800;
+        color:#d9cdf7;
+        margin-bottom:10px;
+    }
+    .step h3{
+        font-size:16.5px;
+        margin-bottom:8px;
+    }
+    .step p{
+        font-size:14px;
+        color:var(--ink-soft);
+        margin:0;
+    }
+
+    /* 榜单 */
+    .rank-list{
+        background:var(--surface);
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        overflow:hidden;
+    }
+    .rank-item{
+        display:flex;
+        align-items:center;
+        gap:16px;
+        padding:16px 22px;
+        border-bottom:1px solid var(--line);
+        transition:.2s;
+    }
+    .rank-item:last-child{border-bottom:none;}
+    .rank-item:hover{background:#faf8ff;}
+    .rank-no{
+        flex:0 0 auto;
+        width:30px;
+        height:30px;
+        border-radius:9px;
+        background:var(--brand-soft);
+        color:var(--brand-dark);
+        font-weight:700;
+        font-size:14px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+    .rank-item:nth-child(1) .rank-no{background:#ffe3d6;color:#c2410c;}
+    .rank-item:nth-child(2) .rank-no{background:#e6e0ff;color:#4a2fa8;}
+    .rank-item:nth-child(3) .rank-no{background:#e0f0ff;color:#1d4ed8;}
+    .rank-body{flex:1;min-width:0;}
+    .rank-body h3{
+        font-size:15.5px;
+        margin-bottom:3px;
+    }
+    .rank-body p{
+        font-size:13.5px;
+        color:var(--ink-soft);
+        margin:0;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+    }
+    .rank-meta{
+        flex:0 0 auto;
+        font-size:13px;
+        color:#8b83a3;
+    }
+
+    /* 提示条 */
+    .notice{
+        background:var(--accent-soft);
+        border:1px solid #ffd9cb;
+        border-radius:var(--radius);
+        padding:22px 26px;
+        display:flex;
+        gap:16px;
+        align-items:flex-start;
+    }
+    .notice-icon{
+        flex:0 0 auto;
+        width:38px;
+        height:38px;
+        border-radius:11px;
+        background:#ffd9cb;
+        color:#c2410c;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        font-size:18px;
+        font-weight:700;
+    }
+    .notice h3{
+        font-size:16.5px;
+        margin-bottom:8px;
+        color:#8a3410;
+    }
+    .notice ul li{
+        font-size:14.5px;
+        color:#7c3a12;
+        padding-left:16px;
+        position:relative;
+        margin-bottom:6px;
+    }
+    .notice ul li::before{
+        content:"";
+        position:absolute;
+        left:0;
+        top:11px;
+        width:6px;
+        height:6px;
+        border-radius:50%;
+        background:#f0a284;
+    }
+
+    /* FAQ */
+    .faq-item{
+        background:var(--surface);
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        margin-bottom:14px;
+        overflow:hidden;
+    }
+    .faq-q{
+        width:100%;
+        text-align:left;
+        background:none;
+        border:none;
+        font-family:inherit;
+        font-size:16px;
+        font-weight:600;
+        color:var(--ink);
+        padding:20px 24px;
+        cursor:pointer;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:14px;
+    }
+    .faq-q::after{
+        content:"+";
+        flex:0 0 auto;
+        font-size:20px;
+        font-weight:400;
+        color:var(--brand);
+        transition:.25s;
+    }
+    .faq-item.open .faq-q::after{
+        transform:rotate(45deg);
+    }
+    .faq-a{
+        max-height:0;
+        overflow:hidden;
+        transition:max-height .3s ease;
+    }
+    .faq-a p{
+        padding:0 24px 20px;
+        margin:0;
+        font-size:14.5px;
+        color:var(--ink-soft);
+    }
+    .faq-item.open .faq-a{
+        max-height:400px;
+    }
+
+    /* 侧栏+正文布局 */
+    .split{
+        display:grid;
+        grid-template-columns:2fr 1fr;
+        gap:34px;
+        align-items:start;
+    }
+    .aside-box{
+        background:var(--surface);
+        border:1px solid var(--line);
+        border-radius:var(--radius);
+        padding:24px;
+        box-shadow:var(--shadow);
+        margin-bottom:20px;
+    }
+    .aside-box h3{
+        font-size:16.5px;
+        margin-bottom:14px;
+        padding-bottom:12px;
+        border-bottom:1px solid var(--line);
+    }
+    .aside-box ul li{
+        font-size:14.5px;
+        color:var(--ink-soft);
+        padding:8px 0;
+        display:flex;
+        gap:10px;
+        align-items:flex-start;
+    }
+    .aside-box ul li::before{
+        content:"›";
+        color:var(--brand);
+        font-weight:700;
+        line-height:1.4;
+    }
+    .prose p{
+        font-size:15.5px;
+        color:#3d3653;
+    }
+
+    /* 页脚 */
+    .site-footer{
+        background:#1d1730;
+        color:#b9b1cf;
+        padding:46px 0 26px;
+        margin-top:20px;
+    }
+    .footer-grid{
+        display:grid;
+        grid-template-columns:1.6fr 1fr 1fr 1fr;
+        gap:30px;
+        margin-bottom:34px;
+    }
+    .footer-brand{
+        font-size:18px;
+        font-weight:700;
+        color:#fff;
+        margin-bottom:12px;
+    }
+    .site-footer p{
+        font-size:13.5px;
+        line-height:1.7;
+        margin:0;
+    }
+    .footer-col h4{
+        font-size:14.5px;
+        color:#fff;
+        margin:0 0 14px;
+    }
+    .footer-col li{
+        font-size:13.5px;
+        padding:4px 0;
+    }
+    .footer-col a:hover{color:#fff;}
+    .footer-bottom{
+        border-top:1px solid rgba(255,255,255,.12);
+        padding-top:20px;
+        font-size:13px;
+        display:flex;
+        justify-content:space-between;
+        flex-wrap:wrap;
+        gap:10px;
+        color:#8f87a8;
+    }
+
+    @media (max-width:980px){
+        .hero{grid-template-columns:1fr;gap:28px;}
+        .grid-3,.grid-4,.steps{grid-template-columns:repeat(2,1fr);}
+        .split{grid-template-columns:1fr;}
+        .footer-grid{grid-template-columns:1fr 1fr;}
+    }
+    @media (max-width:640px){
+        body{font-size:15px;}
+        .hero h1{font-size:27px;}
+        .header-bar{padding:14px 0;}
+        .main-nav a{padding:6px 11px;font-size:13px;}
+        .section{padding:40px 0;}
+        .section-head h2{font-size:22px;}
+        .grid-3,.grid-4,.grid-2,.steps{grid-template-columns:1fr;}
+        .footer-grid{grid-template-columns:1fr;}
+        .rank-meta{display:none;}
+        .card{padding:20px;}
+        .notice{padding:18px;flex-direction:column;gap:12px;}
+    }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="wrap">
+        <div class="header-bar">
+            <div class="logo">
+                <span class="logo-mark">同</span>
+                <span>
+                    搜同网站
+                    <small>同人内容导航 · 同好交流指南</small>
+                </span>
+            </div>
+            <nav class="main-nav" aria-label="主导航">
+                <a href="#intro" class="active">了解定位</a>
+                <a href="#category">内容分类</a>
+                <a href="#method">检索方法</a>
+                <a href="#rank">热门方向</a>
+                <a href="#safety">安全提示</a>
+                <a href="#faq">常见问题</a>
+            </nav>
+        </div>
+
+        <div class="hero">
+            <div>
+                <h1>搜同网站：<em>同人内容检索与同好社区导航</em></h1>
+                <p class="hero-lead">
+                    “搜同网站”通常指以同人作品、同好交流为核心的检索与导航类站点。本页从内容分类、检索思路、浏览习惯与安全注意事项几个角度，帮助第一次接触同人内容的读者快速建立清晰的认知框架。
+                </p>
+                <div class="hero-actions">
+                    <a href="#category" class="btn btn-primary">查看内容分类</a>
+                    <a href="#method" class="btn btn-ghost">了解检索方法</a>
+                </div>
+            </div>
+            <aside class="hero-panel">
+                <h3>快速了解三个要点</h3>
+                <ul class="hero-list">
+                    <li><span class="dot"></span><span>同人内容多以二次创作形式出现，题材与来源作品高度相关。</span></li>
+                    <li><span class="dot"></span><span>不同站点的内容侧重差异较大，先确认定位再浏览更高效。</span></li>
+                    <li><span class="dot"></span><span>浏览时注意来源可靠性、版权说明与个人隐私保护。</span></li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <!-- 定位介绍 -->
+    <section class="section" id="intro">
+        <div class="wrap">
+            <div class="section-head">
+                <h2>“搜同网站”到底指什么<span>？</span></h2>
+                <p>这个说法在日常使用中并没有唯一对应的官方定义，它更像是一个口语化的概括，用来指代与同人作品检索、同好聚集相关的网站类型。理解它的含义，需要先分清几个容易混淆的概念。</p>
+            </div>
+            <div class="split">
+                <div class="prose">
+                    <p>“同人”一词在中文语境里，一般指围绕已有作品、角色或设定展开的二次创作，形式包括文字、绘画、漫画、音频、视频等。它强调的是创作行为本身，而不是某一个固定的平台。因此，所谓“搜同网站”，可以理解为帮助用户找到这类内容的入口型站点、目录型站点或社区型站点。</p>
+                    <p>从实际使用场景看，用户搜索这类词时，目的大多集中在三种：一是想找到某个来源作品的同人创作；二是想进入同好聚集的讨论社区；三是想了解有哪些值得关注的站点与栏目。这三类需求对应的页面结构并不相同，本页把它们整合成一个导航与说明并重的指南页。</p>
+                    <p>需要说明的是，同人内容涉及的来源作品、角色设定、授权状态各不相同。不同站点对内容的收录标准、审核尺度与版权声明也不一致。浏览前先看清站点的说明页面，能减少很多不必要的困扰。</p>
+                </div>
+                <aside>
+                    <div class="aside-box">
+                        <h3>相关概念速览</h3>
+                        <ul>
+                            <li>同人志：以同人创作为主的出版物形式</li>
+                            <li>二次创作：基于已有作品展开的再创作</li>
+                            <li>同好：对同一作品或题材有共同兴趣的人</li>
+                            <li>内容分级：站点对作品适龄范围的标注方式</li>
+                            <li>授权与转载：涉及创作者权益的重要环节</li>
+                        </ul>
+                    </div>
+                    <div class="aside-box">
+                        <h3>浏览前的三个自问</h3>
+                        <ul>
+                            <li>我想找的是作品内容，还是交流社区？</li>
+                            <li>这个站点的内容来源是否清晰可查？</li>
+                            <li>我是否了解该站点的内容分级规则？</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- 内容分类 -->
+    <section class="section section-alt" id="category">
+        <div class="wrap">
+            <div class="section-head">
+                <h2>同人内容的主要<span>分类方向</span></h2>
+                <p>同人内容的划分方式很多，按载体、按来源作品、按题材都能切分。下面按最常见的几种维度整理，方便你在检索时快速定位。</p>
+            </div>
+            <div class="grid grid-3">
+                <article class="cat-item">
+                    <div class="cat-icon">文</div>
+                    <div>
+                        <h3>文字创作</h3>
+                        <p>包括短篇、长篇、连载与合集等形式，通常以文本阅读为主，适合喜欢沉浸式阅读的读者。</p>
+                    </div>
+                </article>
+                <article class="cat-item">
+                    <div class="cat-icon">画</div>
+                    <div>
+                        <h3>插画与漫画</h3>
+                        <p>以视觉表达为核心，单幅插画、条漫、短篇漫画都属于这一类，浏览时更依赖图集式排版。</p>
+                    </div>
+                </article>
+                <article class="cat-item">
+                    <div class="cat-icon">音</div>
+                    <div>
+                        <h3>音频与配音</h3>
+                        <p>包含广播剧、角色配音、翻唱等形式，对音频播放与分集管理有较高要求。</p>
+                    </div>
+                </article>
+                <article class="cat-item">
+                    <div class="cat-icon">影</div>
+                    <div>
+                        <h3>视频与剪辑</h3>
+                        <p>以剪辑、混剪、动画短片为主，通常与视频平台生态结合较紧密。</p>
+                    </div>
+                </article>
+                <article class="cat-item">
+                    <div class="cat-icon">游</div>
+                    <div>
+                        <h3>游戏与设定</h3>
+                        <p>围绕游戏角色、世界观展开的再创作，常与设定集、同人企划等形式一起出现。</p>
+                    </div>
+                </article>
+                <article class="cat-item">
+                    <div class="cat-icon">谈</div>
+                    <div>
+                        <h3>讨论与交流</h3>
+                        <p>以话题讨论、作品推荐、创作交流为主，社区属性强于内容展示属性。</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- 检索方法 -->
+    <section class="section" id="method">
+        <div class="wrap">
+            <div class="section-head">
+                <h2>高效检索同人内容的<span>四个步骤</span></h2>
+                <p>同人内容的检索不像通用搜索那样直接，来源作品名称、角色名、创作者名、题材标签都可能成为有效线索。按下面的顺序推进，通常能少走弯路。</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <h3>明确来源作品</h3>
+                    <p>先确定你想找的是哪部作品、哪个角色或哪个世界观，这是缩小范围最有效的一步。</p>
+                </div>
+                <div class="step">
+                    <h3>选择合适站点</h3>
+                    <p>不同站点在题材侧重、内容形式、更新节奏上差异明显，按需求选择比盲目浏览更省时间。</p>
+                </div>
+                <div class="step">
+                    <h3>善用标签组合</h3>
+                    <p>把作品名、角色名、题材词组合使用，往往比单一关键词更容易命中目标内容。</p>
+                </div>
+                <div class="step">
+                    <h3>核对内容信息</h3>
+                    <p>查看发布时间、分级标注、作者说明，确认是否符合自己的阅读预期。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 热门方向 + 侧栏 -->
+    <section class="section section-alt" id="rank">
+        <div class="wrap">
+            <div class="section-head">
+                <h2>同人圈常见的<span>关注方向</span></h2>
+                <p>以下方向来自同人内容中较为普遍的题材与形式归纳，仅作为了解分类的参考，不代表任何具体站点的排名或推荐。</p>
+            </div>
+            <div class="split">
+                <div>
+                    <div class="rank-list">
+                        <div class="rank-item">
+                            <span class="rank-no">01</span>
+                            <div class="rank-body">
+                                <h3>长篇连载类文字创作</h3>
+                                <p>更新周期长、读者黏性高，适合喜欢追更的读者。</p>
+                            </div>
+                            <span class="rank-meta">文字向</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-no">02</span>
+                            <div class="rank-body">
+                                <h3>短篇合集与主题企划</h3>
+                                <p>围绕统一主题组织多篇作品，阅读节奏轻快。</p>
+                            </div>
+                            <span class="rank-meta">合集向</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-no">03</span>
+                            <div class="rank-body">
+                                <h3>角色插画与图集</h3>
+                                <p>以视觉欣赏为主，浏览体验依赖图片排版与加载速度。</p>
+                            </div>
+                            <span class="rank-meta">视觉向</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-no">04</span>
+                            <div class="rank-body">
+                                <h3>广播剧与配音作品</h3>
+                                <p>对音频质量和分集管理要求较高，适合通勤或放松时收听。</p>
+                            </div>
+                            <span class="rank-meta">音频向</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-no">05</span>
+                            <div class="rank-body">
+                                <h3>同人企划与设定共创</h3>
+                                <p>多位创作者围绕同一设定协作，参与感强。</p>
+                            </div>
+                            <span class="rank-meta">共创向</span>
+                        </div>
+                        <div class="rank-item">
+                            <span class="rank-no">06</span>
+                            <div class="rank-body">
+                                <h3>作品推荐与交流讨论</h3>
+                                <p>以话题和评论为核心，适合想找人交流的读者。</p>
+                            </div>
+                            <span class="rank-meta">社区向</span>
+                        </div>
+                    </div>
+                </div>
+                <aside>
+                    <div class="aside-box">
+                        <h3>选择站点时可关注</h3>
+                        <ul>
+                            <li>内容分类是否清晰，标签体系是否完整</li>
+                            <li>是否提供分级标注与内容提示</li>
+                            <li>更新频率与活跃度是否稳定</li>
+                            <li>是否有明确的版权与转载说明</li>
+                            <li>移动端浏览体验是否顺畅</li>
+                        </ul>
+                    </div>
+                    <div class="aside-box">
+                        <h3>阅读习惯建议</h3>
+                        <ul>
+                            <li>先看简介和标签，再决定是否深入阅读</li>
+                            <li>遇到不适内容及时退出，不必勉强</li>
+                            <li>尊重创作者的署名与转载要求</li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- 安全提示 -->
+    <section class="section" id="safety">
+        <div class="wrap">
+            <div class="section-head">
+                <h2>浏览同人内容时的<span>安全与规范</span></h2>
+                <p>同人内容生态整体依靠创作者与读者的共同维护，浏览过程中的一些基本习惯，既保护自己也尊重他人。</p>
+            </div>
+            <div class="notice">
+                <div class="notice-icon">!</div>
+                <div>
+                    <h3>值得留意的几个方面</h3>
+                    <ul>
+                        <li>优先选择来源清晰、说明完整的站点，避免来源不明的跳转链接。</li>
+                        <li>不随意在陌生页面填写账号、手机号等个人信息。</li>
+                        <li>尊重创作者的授权说明，不擅自搬运、二次上传他人作品。</li>
+                        <li>注意内容分级标注，未成年人应在监护人指导下合理使用网络。</li>
+                        <li>遇到诱导下载、强制注册等异常页面，及时关闭并更换来源。</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section section-alt" id="faq">
+        <div class="wrap">
+            <div class="section-head">
+                <h2>关于搜同网站的<span>常见问题</span></h2>
+                <p>下面整理了几个初次接触这类内容时较常出现的疑问，供参考。</p>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">“搜同网站”是一个具体的网站吗？</button>
+                <div class="faq-a">
+                    <p>不是。它更像是一个口语化的说法，用来泛指与同人内容检索、同好交流相关的网站类型。具体指向哪一类站点，取决于使用者的语境和需求。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">同人内容和原创内容有什么区别？</button>
+                <div class="faq-a">
+                    <p>同人内容通常基于已有的作品、角色或世界观展开再创作，而原创内容则构建全新的设定。两者在创作方式、版权归属和使用规范上都有所不同，阅读时留意站点说明会更清楚。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">如何判断一个同人站点是否可靠？</button>
+                <div class="faq-a">
+                    <p>可以从几个方面观察：页面说明是否完整、内容来源是否可查、是否有明确的版权与分级提示、是否存在强制跳转或诱导行为。信息越透明，通常越值得信任。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">检索时总是找不到想要的内容怎么办？</button>
+                <div class="faq-a">
+                    <p>可以尝试调整关键词组合，把作品名、角色名与题材词搭配使用；也可以更换内容侧重不同的站点。同人内容的分布相对分散，多尝试几个入口是常见做法。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-q" type="button">浏览这类内容需要注意什么？</button>
+                <div class="faq-a">
+                    <p>注意内容分级提示，保护个人隐私信息，尊重创作者的署名与转载要求。遇到来源不明或行为异常的页面，及时退出即可。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="wrap">
+        <div class="footer-grid">
+            <div>
+                <div class="footer-brand">搜同网站</div>
+                <p>同人内容导航与同好交流指南页面，围绕内容分类、检索方法、浏览习惯与安全提示，为读者提供一份清晰、稳妥的参考。</p>
+            </div>
+            <div class="footer-col">
+                <h4>内容导航</h4>
+                <ul>
+                    <li><a href="#intro">定位说明</a></li>
+                    <li><a href="#category">内容分类</a></li>
+                    <li><a href="#method">检索方法</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>参考方向</h4>
+                <ul>
+                    <li><a href="#rank">关注方向</a></li>
+                    <li><a href="#safety">安全提示</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>使用建议</h4>
+                <ul>
+                    <li>留意内容分级标注</li>
+                    <li>尊重创作者权益</li>
+                    <li>保护个人隐私信息</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>本页面为内容科普与导航说明，不提供任何具体作品或资源。</span>
+            <span>请遵守相关法律法规与平台规范，理性浏览。</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    (function(){
+        var items = document.querySelectorAll('.faq-item');
+        items.forEach(function(item){
+            var btn = item.querySelector('.faq-q');
+            if(!btn) return;
+            btn.addEventListener('click', function(){
+                var isOpen = item.classList.contains('open');
+                items.forEach(function(other){
+                    other.classList.remove('open');
+                });
+                if(!isOpen){
+                    item.classList.add('open');
+                }
+            });
+        });
+    })();
+</script>
+
+</body>
+                                                   </html>
