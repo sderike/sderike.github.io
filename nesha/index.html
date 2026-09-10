@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>虐杀游戏-生存对抗玩法解析与作品推荐指南</title>
+<meta name="description" content="虐杀游戏专题站，梳理虐杀游戏的核心玩法、常见类型与代表作，解析生存对抗、猎杀机制与难度设计，并提供挑选与上手建议，帮助玩家快速了解这一题材。">
+<meta name="keywords" content="虐杀游戏,生存对抗游戏,猎杀玩法,非对称对抗,恐怖生存游戏,虐杀游戏推荐">
+<script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+<style>
+  :root{
+    --bg:#0d0b10;
+    --bg-2:#151119;
+    --bg-3:#1d1721;
+    --line:#2e2533;
+    --line-soft:#241d29;
+    --blood:#c8203a;
+    --blood-2:#8e1226;
+    --ember:#e8a33d;
+    --text:#e9e4ec;
+    --text-2:#a99fb3;
+    --text-3:#7b7186;
+    --radius:14px;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(900px 500px at 12% -8%, rgba(200,32,58,.20), transparent 62%),
+      radial-gradient(700px 420px at 96% 4%, rgba(232,163,61,.10), transparent 60%),
+      var(--bg);
+    color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Source Han Sans SC",system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.75;
+    font-size:16px;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;}
+  h1,h2,h3,h4{line-height:1.3;margin:0;font-weight:700;letter-spacing:.2px;}
+  p{margin:0 0 1em;}
+  ul{margin:0;padding:0;list-style:none;}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px;}
+
+  /* ---------- 顶部 ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:60;
+    background:rgba(13,11,16,.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .topbar-inner{
+    max-width:var(--maxw);margin:0 auto;padding:12px 20px;
+    display:flex;align-items:center;gap:22px;
+  }
+  .brand{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+  .brand-mark{
+    width:34px;height:34px;border-radius:9px;
+    background:linear-gradient(145deg,var(--blood),var(--blood-2));
+    display:grid;place-items:center;
+    font-weight:800;font-size:17px;color:#fff;
+    box-shadow:0 0 0 1px rgba(255,255,255,.07), 0 6px 18px rgba(200,32,58,.35);
+  }
+  .brand-text b{display:block;font-size:16.5px;letter-spacing:.5px;}
+  .brand-text span{display:block;font-size:11.5px;color:var(--text-3);letter-spacing:2px;}
+
+  .nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto;}
+  .nav a{
+    padding:7px 13px;border-radius:8px;font-size:14.5px;color:var(--text-2);
+    transition:.18s;white-space:nowrap;
+  }
+  .nav a:hover{background:var(--bg-3);color:var(--text);}
+  .nav a.hot{color:var(--ember);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    border-bottom:1px solid var(--line-soft);
+    padding:58px 0 52px;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      repeating-linear-gradient(115deg, rgba(255,255,255,.022) 0 2px, transparent 2px 9px);
+    opacity:.7;
+  }
+  .hero-grid{
+    position:relative;z-index:2;
+    display:grid;grid-template-columns:1.35fr .95fr;gap:44px;align-items:center;
+  }
+  .tagline{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:12.5px;letter-spacing:1.6px;color:var(--ember);
+    border:1px solid rgba(232,163,61,.35);
+    background:rgba(232,163,61,.07);
+    padding:5px 12px;border-radius:99px;margin-bottom:18px;
+  }
+  .tagline i{width:6px;height:6px;border-radius:50%;background:var(--ember);display:block;}
+  .hero h1{
+    font-size:clamp(28px,4.4vw,44px);
+    letter-spacing:1px;margin-bottom:16px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--blood);
+    text-shadow:0 0 26px rgba(200,32,58,.55);
+  }
+  .hero-lead{
+    color:var(--text-2);font-size:16.5px;max-width:640px;margin-bottom:24px;
+  }
+  .hero-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .btn{
+    display:inline-block;padding:11px 24px;border-radius:10px;
+    font-size:15px;font-weight:600;transition:.2s;border:1px solid transparent;
+  }
+  .btn-primary{
+    background:linear-gradient(145deg,var(--blood),var(--blood-2));
+    color:#fff;box-shadow:0 8px 22px rgba(200,32,58,.32);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(200,32,58,.45);}
+  .btn-ghost{border-color:var(--line);color:var(--text-2);}
+  .btn-ghost:hover{border-color:var(--blood);color:var(--text);}
+
+  .hero-side{
+    background:linear-gradient(160deg,var(--bg-2),var(--bg-3));
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 22px 18px;
+  }
+  .hero-side h3{
+    font-size:14px;letter-spacing:2px;color:var(--text-3);
+    text-transform:uppercase;margin-bottom:14px;font-weight:600;
+  }
+  .quick-list li{
+    display:flex;gap:12px;padding:10px 0;
+    border-bottom:1px dashed var(--line-soft);
+    font-size:14.5px;color:var(--text-2);
+  }
+  .quick-list li:last-child{border-bottom:0;}
+  .quick-list b{
+    color:var(--blood);font-size:12px;letter-spacing:1px;
+    flex-shrink:0;padding-top:4px;font-weight:700;
+  }
+
+  /* ---------- 通用区块 ---------- */
+  section{padding:56px 0;}
+  .sec-head{margin-bottom:30px;}
+  .sec-head .kicker{
+    font-size:12.5px;letter-spacing:2.4px;color:var(--blood);
+    font-weight:700;margin-bottom:8px;display:block;
+  }
+  .sec-head h2{font-size:clamp(21px,2.6vw,27px);margin-bottom:10px;}
+  .sec-head p{color:var(--text-2);max-width:760px;margin:0;font-size:15.5px;}
+
+  /* ---------- 类型卡片 ---------- */
+  .type-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:18px;
+  }
+  .type-card{
+    background:var(--bg-2);
+    border:1px solid var(--line-soft);
+    border-radius:var(--radius);
+    padding:22px 20px;
+    transition:.22s;position:relative;overflow:hidden;
+  }
+  .type-card::before{
+    content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:linear-gradient(180deg,var(--blood),transparent);
+    opacity:0;transition:.22s;
+  }
+  .type-card:hover{border-color:var(--line);transform:translateY(-3px);background:var(--bg-3);}
+  .type-card:hover::before{opacity:1;}
+  .type-card h3{font-size:17px;margin-bottom:10px;display:flex;align-items:center;gap:9px;}
+  .type-card h3 span{
+    width:26px;height:26px;border-radius:7px;flex-shrink:0;
+    background:rgba(200,32,58,.14);color:var(--blood);
+    display:grid;place-items:center;font-size:13px;
+  }
+  .type-card p{font-size:14.5px;color:var(--text-2);margin:0 0 12px;}
+  .chips{display:flex;flex-wrap:wrap;gap:7px;}
+  .chip{
+    font-size:12px;color:var(--text-3);
+    border:1px solid var(--line);border-radius:99px;
+    padding:2px 10px;
+  }
+
+  /* ---------- 玩法拆解 ---------- */
+  .mech{
+    background:linear-gradient(180deg,var(--bg-2),rgba(21,17,25,.4));
+    border-top:1px solid var(--line-soft);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .mech-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:26px;}
+  .mech-item{padding-left:18px;border-left:2px solid var(--line);}
+  .mech-item h3{font-size:16.5px;margin-bottom:9px;color:var(--text);}
+  .mech-item h3 i{
+    font-style:normal;color:var(--blood);font-size:13px;
+    margin-right:8px;font-weight:800;
+  }
+  .mech-item p{font-size:14.5px;color:var(--text-2);margin:0;}
+
+  /* ---------- 作品推荐 ---------- */
+  .work-list{display:grid;gap:16px;}
+  .work{
+    display:grid;grid-template-columns:76px 1fr auto;gap:20px;align-items:center;
+    background:var(--bg-2);border:1px solid var(--line-soft);
+    border-radius:var(--radius);padding:18px 22px;transition:.2s;
+  }
+  .work:hover{border-color:rgba(200,32,58,.45);background:var(--bg-3);}
+  .work-no{
+    font-size:26px;font-weight:800;color:transparent;
+    -webkit-text-stroke:1.4px var(--blood);text-align:center;
+    font-family:Georgia,"Times New Roman",serif;
+  }
+  .work-body h3{font-size:17px;margin-bottom:6px;}
+  .work-body p{font-size:14.5px;color:var(--text-2);margin:0;}
+  .work-meta{
+    display:flex;flex-direction:column;gap:6px;align-items:flex-end;
+    font-size:12.5px;color:var(--text-3);white-space:nowrap;
+  }
+  .work-meta b{color:var(--ember);font-weight:600;}
+
+  /* ---------- 上手建议 ---------- */
+  .tips-grid{display:grid;grid-template-columns:1fr 1fr;gap:34px;}
+  .tip-box h3{
+    font-size:18px;margin-bottom:16px;padding-bottom:12px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .tip-box h3 span{color:var(--blood);}
+  .tip-list li{
+    display:flex;gap:12px;font-size:14.8px;color:var(--text-2);
+    padding:9px 0;line-height:1.7;
+  }
+  .tip-list li::before{
+    content:"▸";color:var(--blood);flex-shrink:0;font-size:13px;padding-top:2px;
+  }
+  .warn{
+    background:rgba(232,163,61,.06);
+    border:1px solid rgba(232,163,61,.28);
+    border-radius:var(--radius);
+    padding:20px 22px;margin-top:26px;
+  }
+  .warn h4{font-size:15px;color:var(--ember);margin-bottom:10px;}
+  .warn p{font-size:14.3px;color:var(--text-2);margin:0;}
+
+  /* ---------- FAQ ---------- */
+  .faq{border-top:1px solid var(--line-soft);}
+  .faq-item{
+    border-bottom:1px solid var(--line-soft);
+    padding:22px 0;
+  }
+  .faq-item h3{
+    font-size:16.5px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;
+  }
+  .faq-item h3::before{
+    content:"Q";flex-shrink:0;
+    width:24px;height:24px;border-radius:6px;
+    background:rgba(200,32,58,.15);color:var(--blood);
+    font-size:13px;display:grid;place-items:center;font-weight:800;
+    margin-top:2px;
+  }
+  .faq-item p{font-size:14.8px;color:var(--text-2);margin:0 0 0 36px;}
+
+  /* ---------- 页脚 ---------- */
+  footer{
+    background:var(--bg-2);
+    border-top:1px solid var(--line-soft);
+    padding:44px 0 26px;
+  }
+  .foot-grid{
+    display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:32px;
+    padding-bottom:30px;border-bottom:1px solid var(--line-soft);
+  }
+  .foot-brand p{font-size:14px;color:var(--text-3);margin:12px 0 0;max-width:320px;}
+  .foot-col h4{
+    font-size:14px;color:var(--text);margin-bottom:14px;letter-spacing:.6px;
+  }
+  .foot-col li{margin-bottom:9px;}
+  .foot-col a{font-size:13.8px;color:var(--text-3);transition:.18s;}
+  .foot-col a:hover{color:var(--blood);}
+  .foot-bottom{
+    padding-top:20px;display:flex;justify-content:space-between;
+    gap:16px;flex-wrap:wrap;font-size:13px;color:var(--text-3);
+  }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:32px;}
+    .tips-grid{grid-template-columns:1fr;gap:26px;}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:26px;}
+  }
+  @media (max-width:720px){
+    body{font-size:15.5px;}
+    .topbar-inner{flex-wrap:wrap;gap:12px;padding:10px 16px;}
+    .nav{margin-left:0;width:100%;overflow-x:auto;padding-bottom:2px;}
+    .nav a{padding:6px 11px;font-size:14px;}
+    .wrap{padding:0 16px;}
+    .hero{padding:40px 0 38px;}
+    section{padding:42px 0;}
+    .work{grid-template-columns:1fr;gap:10px;padding:16px 18px;}
+    .work-no{text-align:left;font-size:20px;}
+    .work-meta{flex-direction:row;gap:14px;align-items:center;}
+    .foot-grid{grid-template-columns:1fr;}
+    .faq-item p{margin-left:0;}
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top">
+      <span class="brand-mark">虐</span>
+      <span class="brand-text">
+        <b>虐杀游戏</b>
+        <span>HUNT &amp; SURVIVE</span>
+      </span>
+    </a>
+    <nav class="nav">
+      <a href="#types">题材分类</a>
+      <a href="#mechanics">玩法机制</a>
+      <a href="#works" class="hot">作品推荐</a>
+      <a href="#tips">上手建议</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="tagline"><i></i>生存对抗 · 猎杀玩法专题</span>
+        <h1>什么是<em>虐杀游戏</em>？<br>从猎杀机制到生存对抗的完整解读</h1>
+        <p class="hero-lead">
+          “虐杀游戏”并不是一个严格的官方分类，而是玩家对一类以<strong>追杀、逃生、非对称对抗</strong>为核心的游戏的统称。
+          这类作品通常把玩家分成猎手与猎物两方，用压迫感、追逐节奏和高强度心理博弈构成主要体验。
+          本页梳理它的常见类型、核心机制、挑选思路与上手注意事项，帮助你判断这类游戏是否适合自己。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#works">查看代表方向</a>
+          <a class="btn btn-ghost" href="#mechanics">了解核心机制</a>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <h3>快速导航</h3>
+        <ul class="quick-list">
+          <li><b>01</b><span>非对称对抗：一方强、一方多，靠配合翻盘</span></li>
+          <li><b>02</b><span>潜行逃生：躲避视线、管理资源与噪音</span></li>
+          <li><b>03</b><span>合作生存：多人分工修机、开门、撤离</span></li>
+          <li><b>04</b><span>心理压迫：音效、视野与未知带来的紧张感</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 题材分类 -->
+  <section id="types">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">GENRES</span>
+        <h2>虐杀游戏常见的四种题材方向</h2>
+        <p>不同作品对“虐杀”的诠释差异很大：有的强调猎手视角的压倒性力量，有的强调逃生者的极限操作，还有的把重点放在团队配合与信息博弈上。先分清方向，再决定是否入手。</p>
+      </div>
+      <div class="type-grid">
+        <article class="type-card">
+          <h3><span>①</span>非对称对抗</h3>
+          <p>一名或少数强力角色对抗多名较弱角色，双方目标不同、能力不对等。平衡性依赖地图设计与数值调整，是这类题材中最主流的形态。</p>
+          <div class="chips"><span class="chip">强弱不对等</span><span class="chip">团队配合</span><span class="chip">反复对局</span></div>
+        </article>
+        <article class="type-card">
+          <h3><span>②</span>潜行逃生</h3>
+          <p>玩家多数时间处于弱势，需要依靠躲藏、绕路、制造干扰来推进目标。节奏偏慢，但对环境观察与路线规划要求很高。</p>
+          <div class="chips"><span class="chip">视线管理</span><span class="chip">噪音控制</span><span class="chip">路线规划</span></div>
+        </article>
+        <article class="type-card">
+          <h3><span>③</span>合作生存</h3>
+          <p>多名玩家共同完成修复、收集、开启出口等任务，同时抵御或躲避威胁。沟通效率往往比个人操作更影响结果。</p>
+          <div class="chips"><span class="chip">分工协作</span><span class="chip">资源分配</span><span class="chip">语音沟通</span></div>
+        </article>
+        <article class="type-card">
+          <h3><span>④</span>动作猎杀</h3>
+          <p>更偏向动作与战斗，玩家拥有反击甚至反杀的手段，追逐与交火交替出现，整体节奏更快、对抗性更强。</p>
+          <div class="chips"><span class="chip">即时战斗</span><span class="chip">连招闪避</span><span class="chip">高风险</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 玩法机制 -->
+  <section id="mechanics" class="mech">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">MECHANICS</span>
+        <h2>决定体验的五个核心机制</h2>
+        <p>同样是“被追杀”，不同机制带来的感受完全不同。理解下面这些设计点，能帮你更快判断一款作品是否对味。</p>
+      </div>
+      <div class="mech-grid">
+        <div class="mech-item">
+          <h3><i>01</i>视野与感知</h3>
+          <p>猎手是否拥有透视、心跳提示或范围感知，直接决定逃生者的容错空间。感知越强，越依赖地形与时机。</p>
+        </div>
+        <div class="mech-item">
+          <h3><i>02</i>追逐与脱战</h3>
+          <p>翻窗、绕板、断线等脱战手段是逃生玩法的技术核心，也是高手与新手差距最明显的地方。</p>
+        </div>
+        <div class="mech-item">
+          <h3><i>03</i>目标进度</h3>
+          <p>修机、解谜、收集道具等进度条设计，让对局有明确的推进感，也迫使玩家在安全与效率之间取舍。</p>
+        </div>
+        <div class="mech-item">
+          <h3><i>04</i>资源与道具</h3>
+          <p>治疗、加速、干扰类道具通常数量有限，何时使用往往比是否拥有更关键。</p>
+        </div>
+        <div class="mech-item">
+          <h3><i>05</i>地图结构</h3>
+          <p>板区、死角、安全屋的分布决定了追逐能否被拉长，也是平衡性调整最频繁的部分。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 作品推荐 -->
+  <section id="works">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">RECOMMEND</span>
+        <h2>按体验偏好挑选方向</h2>
+        <p>下面按玩法特征归纳几类常见方向，便于你根据自己喜欢的节奏与强度去对照选择，而不是简单地按热度排序。</p>
+      </div>
+      <div class="work-list">
+        <article class="work">
+          <div class="work-no">01</div>
+          <div class="work-body">
+            <h3>偏重团队配合的多人对抗</h3>
+            <p>适合喜欢语音开黑、愿意研究分工与站位的玩家。单局时长适中，输赢更多取决于信息共享与执行效率，对个人枪法或操作要求相对友好。</p>
+          </div>
+          <div class="work-meta"><span>节奏 <b>中</b></span><span>上手 <b>较易</b></span></div>
+        </article>
+        <article class="work">
+          <div class="work-no">02</div>
+          <div class="work-body">
+            <h3>强调潜行与压迫感的单人/小队体验</h3>
+            <p>适合偏爱氛围、愿意慢慢摸索路线的玩家。威胁往往不可正面对抗，需要靠观察、耐心与临场判断脱身，紧张感更持续。</p>
+          </div>
+          <div class="work-meta"><span>节奏 <b>偏慢</b></span><span>上手 <b>中等</b></span></div>
+        </article>
+        <article class="work">
+          <div class="work-no">03</div>
+          <div class="work-body">
+            <h3>带反击手段的动作向作品</h3>
+            <p>适合不满足于一味逃跑、希望正面对抗的玩家。需要熟悉闪避、格挡与输出窗口，操作上限高，但挫败感也更明显。</p>
+          </div>
+          <div class="work-meta"><span>节奏 <b>快</b></span><span>上手 <b>偏难</b></span></div>
+        </article>
+        <article class="work">
+          <div class="work-no">04</div>
+          <div class="work-body">
+            <h3>轻量化的休闲对抗</h3>
+            <p>规则直观、单局时间短，适合碎片时间游玩。机制简化后深度有限，但更适合作为朋友间的轻松娱乐选择。</p>
+          </div>
+          <div class="work-meta"><span>节奏 <b>轻快</b></span><span>上手 <b>容易</b></span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 上手建议 -->
+  <section id="tips">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">GUIDE</span>
+        <h2>新手入门建议与内容提示</h2>
+        <p>这类游戏普遍存在学习曲线陡、对局压力大的特点，提前了解一些方法可以明显减少早期挫败感。</p>
+      </div>
+      <div class="tips-grid">
+        <div class="tip-box">
+          <h3><span>◆</span> 快速上手的方法</h3>
+          <ul class="tip-list">
+            <li>先熟悉一张地图的关键区域，再逐步扩展，比一次性记全更有效。</li>
+            <li>优先掌握一两个角色或一套打法，熟练度带来的收益通常高于频繁更换。</li>
+            <li>把“活下来”放在“完成任务”之前，很多失败源于贪进度而暴露位置。</li>
+            <li>养成听声辨位的习惯，脚步、环境音与提示音往往是最早的预警。</li>
+            <li>复盘失败对局，重点看自己何时被发现、哪次决策导致了连锁失误。</li>
+          </ul>
+        </div>
+        <div class="tip-box">
+          <h3><span>◆</span> 挑选时的考量点</h3>
+          <ul class="tip-list">
+            <li>确认单局时长是否符合你的可支配时间，长对局的压力明显更高。</li>
+            <li>关注是否需要语音沟通，独狼玩家在强配合玩法中体验会打折。</li>
+            <li>了解匹配机制与人数要求，人数不足时部分玩法可能难以开局。</li>
+            <li>查看运行配置需求，避免因设备性能问题影响追逐中的操作反馈。</li>
+            <li>留意内容分级与恐怖元素强度，按自身接受度选择。</li>
+          </ul>
+        </div>
+      </div>
+      <div class="warn">
+        <h4>内容提示</h4>
+        <p>该题材普遍包含紧张、惊悚或血腥表现，部分作品对心理承受能力有一定要求。建议在购买或下载前查看官方分级说明与实机演示，理性评估自身与同玩者的接受程度，并合理安排游戏时间。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="kicker">FAQ</span>
+        <h2>关于虐杀游戏的常见问题</h2>
+      </div>
+      <article class="faq-item">
+        <h3>“虐杀游戏”是一个正式的游戏分类吗？</h3>
+        <p>不是。它更接近玩家社群中的口语化称呼，通常用来概括以追杀、逃生、非对称对抗为主要玩法的作品。不同人使用这个词时，指向的具体游戏可能并不相同，因此看具体玩法描述比看标签更可靠。</p>
+      </article>
+      <article class="faq-item">
+        <h3>这类游戏一定要多人联机才能玩吗？</h3>
+        <p>不一定。非对称对抗类通常依赖多人对局，但也有不少作品提供单人剧情或单人潜行模式。如果你更偏好独自游玩，可以优先关注带单人内容的作品。</p>
+      </article>
+      <article class="faq-item">
+        <h3>新手会不会很难入门？</h3>
+        <p>多数作品的规则本身并不复杂，难点在于对地图、角色能力和对手习惯的熟悉过程。通常经过一段时间的固定练习，体验会有明显改善。选择匹配机制相对友好的作品，能降低早期压力。</p>
+      </article>
+      <article class="faq-item">
+        <h3>玩这类游戏需要注意什么？</h3>
+        <p>首先是内容接受度，紧张与惊悚元素是这类作品的组成部分；其次是时间管理，单局对抗容易连续进行。另外，多人玩法中保持基本礼貌与沟通，能显著提升整体体验。</p>
+      </article>
+      <article class="faq-item">
+        <h3>如何判断一款作品是否适合自己？</h3>
+        <p>可以先看实机演示，重点关注三件事：节奏是快是慢、是否需要语音配合、失败后的挫败感有多强。这三点基本决定了一款作品能否长期玩下去。</p>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top">
+          <span class="brand-mark">虐</span>
+          <span class="brand-text">
+            <b>虐杀游戏</b>
+            <span>HUNT &amp; SURVIVE</span>
+          </span>
+        </a>
+        <p>聚焦生存对抗与猎杀玩法的内容专题，整理题材分类、机制解析与选择建议，帮助玩家更清晰地了解这一类型。</p>
+      </div>
+      <div class="foot-col">
+        <h4>内容导航</h4>
+        <ul>
+          <li><a href="#types">题材分类</a></li>
+          <li><a href="#mechanics">玩法机制</a></li>
+          <li><a href="#works">作品推荐</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>玩家参考</h4>
+        <ul>
+          <li><a href="#tips">上手建议</a></li>
+          <li><a href="#faq">常见问题</a></li>
+          <li><a href="#top">返回顶部</a></li>
+        </ul>
+      </div>
+      <div class="foot-col">
+        <h4>温馨提示</h4>
+        <ul>
+          <li><a href="#tips">内容分级说明</a></li>
+          <li><a href="#tips">理性游戏提示</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>本页内容为题材科普与玩法介绍，不涉及任何具体作品的下载或交易。</span>
+      <span>请根据自身情况合理安排游戏时间。</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var links = document.querySelectorAll('.nav a[href^="#"]');
+    for (var i = 0; i < links.length; i++) {
+      links[i].addEventListener('click', function (e) {
+        var id = this.getAttribute('href');
+        var target = document.querySelector(id);
+        if (target) {
+          e.preventDefault();
+          var top = target.getBoundingClientRect().top + window.pageYOffset - 70;
+          window.scrollTo({ top: top, behavior: 'smooth' });
+        }
+      });
+    }
+  })();
+</script>
+
+</body>
+                </html>
